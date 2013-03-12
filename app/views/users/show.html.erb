@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Email:</b>
+  <%= @user.temp ? '' : @user.email %>
+</p>
+
+<div class="row-fluid">
+	<div class="span4 offset2 lists">
+		<h1 style="text-align:center">Lists</h1>
+		<% @user.shopping_lists.each do |list| %>
+			<div class="list-item"><%= link_to list.name, shopping_list_url(:id=>list.id) %></div>
+		<% end %>
+	</div>
+	<div class="span4 shops">
+		<h1 style="text-align:center">Shops</h1>
+		<% @user.shops.each do |shop| %>
+			<div class="shop-item"><%= link_to shop.name, shop %></div>
+		<% end %>
+	</div>
+</div>
+<hr>
+
+<%= link_to 'Back', :back %>

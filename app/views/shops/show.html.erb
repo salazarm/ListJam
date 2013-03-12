@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<% if @shop.user_id != @cur_user.id %>
+	<span class="owner">
+		<%= link_to "See Owner", {:controller=> "users", :action=> "show", :id => @shop.user_id} %>
+	</span>
+<% else %>
+	<span class="manage">
+		<%= link_to 'Manage Shop', edit_shop_path(@shop) %>
+	</span>
+<% end %>
+
+<% @items.each do |item| %>
+	<div class="item">
+		<span class="name"><%=item.name %></span>
+		<span class="price">$<%=item.price %></price>
+		<span class="action">
+			<% if @shop.user_id != @cur_user.id %>
+				<%= link_to "Add to list", {:controller=> "users", :action=>"add_item", :id=>item.id },:method=>"put" %>
+			<% else %>
+				<%= link_to "Edit", {:controller=> "items", :action=>"edit", :id=>item.id} %>
+				<%= link_to "Remove", {:controller=> "items", :action=>"destroy"}, :method => :delete %> 
+			<% end %>
+		</span>
+	</div>
+<% end %>
+
+<hr>
+<span class="back">
+<%= link_to 'Back', shops_path %>
+</span>

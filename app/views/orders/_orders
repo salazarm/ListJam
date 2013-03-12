@@ -1,0 +1,34 @@
+<% if @errors %>
+	<div class="errors">
+		<%= @errors %>
+	</div>
+<% end %>
+
+<% @orders.each do |order| %>
+<div class="row-fluid">
+	<span style="margin: 5px; right-margin: 20px;">	
+			<%= order.created_at.strftime("%d %b. %Y") %>
+		</span>
+		<span style="margin: 5px; right-margin: 20px;">	
+			<%= order.item.name %>
+		</span>
+		<span style="margin: 5px; right-margin: 20px;">  
+	  	$<%= order.item.price %>
+	  </span>
+	  <span class="other">
+		  <% if buyer %>
+		  	Seller: <%=link_to  order.seller.email, order.seller %>
+		  <% else %>
+		  	Buyer: <%=link_to order.buyer.email, order.buyer %>
+		  <% end %>
+		</span>
+ </div>
+<% end %>
+<br />
+
+<% if @orders.empty? %>
+<p style="font-style:italic">Nothing to see here... :(</p>
+<% end %>
+
+<hr>
+<%= link_to 'Back', :back %>

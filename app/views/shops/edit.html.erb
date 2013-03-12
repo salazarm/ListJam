@@ -1,0 +1,9 @@
+<h1>Managing <%=@shop.name%></h1>
+
+<%= render 'form' %>
+
+<div class="add-item">
+<%= link_to 'Add Item', new_item_path(:shop_id => @shop.id) %>
+</div>
+<br>
+<%= link_to 'Back', shops_path %>
