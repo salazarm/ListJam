@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ListJam</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= csrf_meta_tags %>
+<link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="session">
+  <div class="container">
+  	<% if @cur_user && !@cur_user.temp  && @cur_user.email %>
+      <span class="pull-right">
+        <%= button_to 'logout', logout_path, :class => "punch" %>
+      </span><br>
+      <span class="logged pull-right">
+        Logged in as <%= link_to @cur_user.email, @cur_user, :style=>"color:#047b8d;" %>
+      </span>
+  	<% else %> 
+      <span class="pull-right">
+      <%= button_to 'login', login_path, :class => "punch" %>
+      </span>
+      <span class="pull-right OR"> Or </span>
+      <span class="pull-right">
+      <%= button_to 'sign up', signup_path, :class => "punch" %>
+      </span>
+    <% end %>
+  </div>
+</div>
+
+<div id="banner">
+  <h1 class="h1"><a href=<%= root_url %>>ListJam</a></h1>
+</div>
+<div class="content container" style="margin-top:50px;">
+  
+  <div style="margin-top:-20px; margin-bottom: 20px">
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, :id => "flash_#{name}" %>
+    <% end %>
+  </div>
+
+  <% if @cur_user %>
+    <div id="account-module" class="pull-right">
+      <div class="account-title">
+        Account
+      </div>
+      <div class="account-list">
+        <%= link_to "Current List", {:controller=>"shopping_lists",:action=>"show", :id=> active_list(@cur_user)} %>
+      </div>
+      <div class="account-order">
+        <%= link_to "Orders", orders_url %>
+      </div>
+      <% unless is_temp_user?(@cur_user) %>
+        <div class="account-sales">
+          <%= link_to "Sales", {:controller=>"orders",:action=>"sales_index"} %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= yield %>
+</div>
+
+<div class="push"></div>
+
+<div class="container footer">&copy copyright 2013 Marco Salazar</div>
+<%= javascript_include_tag "application" %>
+</body>
+</html>

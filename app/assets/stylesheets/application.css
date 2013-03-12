@@ -1,0 +1,215 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_tree
+ *= require_self
+ */
+
+ * {margin:0;padding:0;} 
+
+html, body {
+	background-color: #dbdbdb;
+	font-family: 'Cabin', Helvetica, Arial, sans-serif;
+  font-size: 15px;
+}
+
+a:hover {
+	color: #047b8d;
+	background-color: rgba(0,0,0,0);
+}
+
+h1, .h1 {
+    font-family: 'Lobster', Georgia, Times, serif;
+    font-size: 42px;
+    line-height: 55px;
+}
+
+.h1 {
+	font-size: 70px;
+}
+
+h1 a:hover{
+	background-color: rgba(0,0,0,0);
+	color: #047b8d;
+}
+p {
+  font-family: 'Cabin', Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 25px;
+}
+
+
+#session {
+	padding: 10px;
+	background: #808080;
+	color: #2e2e2e;
+	height: 35px;
+}
+
+#session a{
+	color: #2e2e2e;
+}
+
+#session a:hover{
+	background: none;
+	color: #fff;
+}
+
+#banner {
+	color: rgba(76,189,222,1);
+	text-align: center;
+	background-color: gray;
+	background-image: linear-gradient(transparent 50%, rgba(255,255,255,.5) 50%);
+	background-size: 50px 50px;
+	margin-top: -30px;
+	font-family: 'Lobster', Georgia, Times, serif;
+	font-size: 110px;
+	line-height: 200px;
+	-webkit-text-fill-color:  rgba(76,189,222,.9);
+	-webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgba(0,0,0,.3);
+}
+
+.punch:hover {
+	-webkit-box-shadow: inset 0 0px 20px 1px #87adff, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111111;
+	box-shadow: inset 0 0px 20px 1px #87adff, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111111;
+	cursor: pointer;
+}
+
+.OR {
+	font-family: 'Lobster', Georgia, Times, serif;
+	color: #000;
+	margin-top: 52px;
+	margin-left: 10px;
+	letter-spacing: 1px;
+}
+.punch, a.punch {
+	background: #4162a8;
+	border-top: 1px solid #38538c;
+	border-right: 1px solid #1f2d4d;
+	border-bottom: 1px solid #151e33;
+	border-left: 1px solid #1f2d4d;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 10px 1px #5c8bee, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111111;
+	box-shadow: inset 0 1px 10px 1px #5c8bee, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111111;
+	color: #fff;
+	padding: 6px 10px 6px 10px;
+	text-align: center;
+	-webkit-background-clip: padding-box;
+	text-shadow: 0px -1px 1px #1e2d4d;
+	width: 150px;
+	margin-left: 18px;
+	margin-top: 42px;
+	font-family: Lobster;
+	letter-spacing: 1px
+}
+
+.logged {
+	margin-top: 35px;
+}
+
+#error_explanation {
+	border: none;
+}
+.item .name, .item .price {
+	margin-right: 20px;
+}
+#error_explanation h2 {
+	border: none;
+	background-color: #db6265;
+	font-weight: normal;
+	padding: 5px;
+	text-align: center;
+}
+
+#error_explanation .error_message {
+	padding: 2px;
+	text-align: center;
+}
+
+.footer {
+	text-align: center;
+}
+
+.nav span, .nav .active, .items{
+	font-size: 24px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-right: 20px;
+	margin-top: 0px;
+	margin-bottom: 10px;
+	background-color: #686868;
+	color: #fff;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	text-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 6px 12px rgba(0, 0, 0, .25), 0 6px 0 rgba(255, 255, 255, 0.25);
+}
+
+.nav span a {
+	color: #fff;
+	text-decoration: underline;
+}
+
+.nav span a:hover{
+	text-shadow: 0 3px 3px rgba(255, 255, 255, 0.5);
+	background-color: rgba(0,0,0,0);
+	color: #047b8d;
+}
+
+.items {
+	text-shadow: none;
+	padding: 0;
+}
+
+#account-module {
+	float: right;
+	padding: 10px 20px 35px 20px;
+	background-color: #bfbfbf;
+	margin-bottom: -210px;
+		-moz-border-radius-topleft: 20px;
+	-webkit-border-top-left-radius: 20px;
+	 border-top-left-radius: 20px;
+	-moz-border-radius-topright: 20px;
+	-webkit-border-top-right-radius: 20px;
+	border-top-right-radius: 20px;
+	-moz-border-radius-bottomright: 20px;
+	-webkit-border-bottom-right-radius: 20px;
+	border-bottom-right-radius: 20px;
+	-moz-border-radius-bottomleft: 90px;
+	-webkit-border-bottom-left-radius: 90px;
+	border-bottom-left-radius: 90px;
+	-moz-box-shadow: -4px 4px 8px rgba(0,0,0,.2);
+  -webkit-box-shadow: -4px 4px 8px rgba(0,0,0,.2);
+  box-shadow: -4px 4px 8px rgba(0,0,0,.2);
+  z-index: 9999;
+}
+
+#account-module, .account-list a, .account-order a, .account-sales a {
+	color: #047b8d;
+	text-align: right;
+}
+
+#account-module .account-title {
+	margin-bottom: 10px;
+	text-align: center;
+	font-family: 'Lobster', Georgia, Times, serif;
+	color: #2e2e2e;
+	border-bottom-color: #000;
+	border-bottom-style: dashed;
+	border-bottom-width: 2px;
+}
+
+.item {
+	padding: 10px;
+}

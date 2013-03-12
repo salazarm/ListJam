@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+
+<h2> <%= @shopping_list.name %></h2>
+<% if can_modify_list?(@cur_user, @shopping_list) && !is_temp_user?(@cur_user) %>
+	<% if is_active_list?(@cur_user, @shopping_list) %>
+		<span class="active">This is your currently active list</span>
+	<% else %>
+		<span class="inactive">
+			<%= link_to "Make this your active", {:controller=>'users', :action=>'make_list_active', :list_id=> @shopping_list.id}, :method=>'post' %>
+		</span>
+	<% end %><br><br>
+<span class="edit"><%= link_to 'Edit', edit_shopping_list_path(@shopping_list) %></span>
+<% end %>
+
+<% unless @shopping_list.items.empty? %>
+	<h3>Items:</h3>
+		<div class="items">
+			<% @items.each do |item| %>
+				<div class="item">
+					<span class="name" style="margin-right:20px"><%= item.name %></span>
+					<span class="price" style="margin-right:20px">$<%= item.price.round(2) %></span>
+					<span class="store" style="margin-left:20px">
+						<%= link_to "Visit Store", shop_url(:id => item.shop_id) %>
+					</span>
+				</div>
+			<% end %>
+		</div>
+		<% if can_modify_list?(@cur_user, @shopping_list) && !@items.empty? %>
+			<div class="total" >Total: $<%= @items.sum(:price) %></div>
+			<span class="order-this"><%= link_to "Order this list!", {:controller=>"orders", :action=>"create",
+									:list_id => @shopping_list.id}, :method => "post" %>
+			</span>
+
+		<% end %>
+<% else %>
+	<p style="font-style:italic">There are no items to see :(</p>
+<% end %>
+<hr>
+<%= link_to 'All Lists', shopping_lists_url %>

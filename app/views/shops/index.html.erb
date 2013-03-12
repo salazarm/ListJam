@@ -1,0 +1,12 @@
+<%= render :partial => "layouts/nav", :locals => {:active => "shops"}%>
+<br><br>
+<% @shops.each do |shop| %>
+	<div class="span3"><%= link_to shop.name, shop %></div>
+<% end %>
+
+<br >
+<hr>
+
+<% unless @cur_user.temp %>
+	<%= link_to 'New Shop', new_shop_path %>
+<% end %>

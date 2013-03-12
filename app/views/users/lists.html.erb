@@ -1,0 +1,8 @@
+<div id="lists">
+	<% @cur_user.shopping_lists.each do |list| %>
+		<span class="list-name">list.name</span>
+		<% button_to "Edit list" edit_list_url %>
+		<% button_to 'Destroy', list, method: :delete, data: { confirm: 'Are you sure?' } %>
+		<br />
+	<% end %>
+</div>
