@@ -16,8 +16,8 @@ class ItemsController < ApplicationController
   # GET /items/new
   # GET /items/new.json
   def new
+    @shop = Shop.find_by_id(params[:shop_id])
     @item = Item.new
-    @shop_id = params[:shop_id]
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @item }
@@ -42,7 +42,10 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(params[:item])
     @cur_user = current_user
-
+    unless Shop.find_by_id(params[:item][:shop_id]).user_id == @cur_user.id
+      flash.alert = "You do not own that item"
+      redirect_to root_url and return
+    end
     respond_to do |format|
       if @item.save
         @shop = Shop.find_by_id(@item.shop_id)

@@ -19,6 +19,7 @@
     <%= f.label :price %><br />
     <%= f.text_field :price %>
   </div>
+  <%= f.hidden_field :shop_id, :value => @shop.id %>
   <div class="actions">
     <%= f.submit %>
   </div>
