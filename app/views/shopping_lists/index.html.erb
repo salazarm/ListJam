@@ -1,0 +1,13 @@
+
+<%= render :partial => "layouts/nav", :locals => {:active => "lists"} %>
+<br><br>
+<% @shopping_lists.each do |shopping_list| %>
+  <%= link_to shopping_list.name, shopping_list %><br />
+<% end %>
+
+<br >
+<hr>
+
+<% unless @cur_user.temp %>
+	<%= link_to 'New Shopping list', new_shopping_list_path %>
+<% end %>

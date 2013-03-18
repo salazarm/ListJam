@@ -1,0 +1,17 @@
+<div class="nav">
+	<% unless active=="shops" %>
+	<span class=<%= active=="shops" ? "active" : ""%> >Currently browsing lists. Switch to 
+		<%= link_to "Shops", :controller=>'shops', :action=>'index' %>
+		instead?
+	<% end %>
+	</span>
+	
+	<% unless active=="lists" %>
+	<span class=<%= active=="lists" ? "active" : ""%>>
+	Currently browsing shops. Switch to 
+		<%= link_to "Lists", :controller=>'shopping_lists', :action=> 'index' %>
+		instead?
+	<% end %>
+
+	</span>
+</div>
