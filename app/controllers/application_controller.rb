@@ -9,22 +9,26 @@ class ApplicationController < ActionController::Base
   def current_user
     session[:return_to] ||= request.referer  
     unless cookies[:auth_token].nil?
-      @current_user ||= User.find_by_auth_token(
+      # If there is a session
+      @cur_user ||= User.find_by_auth_token(
       	cookies[:auth_token])
-      unless @current_user
-        return create_temporary_user
+
+      unless @cur_user
+        # If the session does not belongs to a user
+        create_temporary_user
       end
-      return @current_user
     else
-      return create_temporary_user
+      # If there is no session
+      create_temporary_user
     end
   end  
-  helper_method :current_user
 
   # Creates a temporary user
   def create_temporary_user
-		@current_user = User.create(:temp => true)
-		cookies.permanent[:auth_token] = @current_user.auth_token
-    return @current_user
+		@cur_user = User.create(:temp => true)
+		cookies.permanent[:auth_token] = @cur_user.auth_token
+    return @cur_user
   end
+
+  helper_method :current_user
 end  

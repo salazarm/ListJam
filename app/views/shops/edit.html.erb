@@ -4,6 +4,7 @@
 
 <div class="add-item">
 <%= link_to 'Add Item', new_item_path(:shop_id => @shop.id) %>
+<%= link_to("Delete", @shop, :method => :delete, :class => 'action') %>
 </div>
 <br>
 <%= link_to 'Back', shops_path %>

@@ -13,7 +13,7 @@
 <% @items.each do |item| %>
 	<div class="item">
 		<span class="name"><%=item.name %></span>
-		<span class="price">$<%=item.price %></price>
+		<span class="price">$<%=item.price.round(2) %></price>
 		<span class="action">
 			<% if @shop.user_id != @cur_user.id %>
 				<%= link_to "Add to list", {:controller=> "users", :action=>"add_item", :id=>item.id },:method=>"put" %>

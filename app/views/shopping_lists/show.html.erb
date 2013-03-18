@@ -2,15 +2,22 @@
 
 
 <h2> <%= @shopping_list.name %></h2>
+<br>
 <% if can_modify_list?(@cur_user, @shopping_list) && !is_temp_user?(@cur_user) %>
 	<% if is_active_list?(@cur_user, @shopping_list) %>
 		<span class="active">This is your currently active list</span>
 	<% else %>
 		<span class="inactive">
-			<%= link_to "Make this your active", {:controller=>'users', :action=>'make_list_active', :list_id=> @shopping_list.id}, :method=>'post' %>
+			<%= link_to "Make this your active list", {:controller=>'users', :action=>'make_list_active', :list_id=> @shopping_list.id}, :method=>'post' %>
 		</span>
-	<% end %><br><br>
-<span class="edit"><%= link_to 'Edit', edit_shopping_list_path(@shopping_list) %></span>
+	<% end %>
+	<span class="edit" style="margin-left:40px">
+		<%= link_to 'Edit', edit_shopping_list_path(@shopping_list) %>
+	</span>
+	<span class="delete" style="margin-left:40px">
+			<%= link_to("Delete", @shopping_list, :method => :delete, :class => 'action') %>
+		</span> 
+		<br><br>
 <% end %>
 
 <% unless @shopping_list.items.empty? %>
@@ -23,14 +30,23 @@
 					<span class="store" style="margin-left:20px">
 						<%= link_to "Visit Store", shop_url(:id => item.shop_id) %>
 					</span>
+					<span class="remove" style="margin-left:20px">
+						<%= link_to "Remove Item", {:controller=>'shopping_lists', :action=>'remove_item', :item_id=>item.id, :list_id=>@shopping_list.id}, :method=>"post" %>
+					</span>
 				</div>
 			<% end %>
 		</div>
 		<% if can_modify_list?(@cur_user, @shopping_list) && !@items.empty? %>
-			<div class="total" >Total: $<%= @items.sum(:price) %></div>
-			<span class="order-this"><%= link_to "Order this list!", {:controller=>"orders", :action=>"create",
-									:list_id => @shopping_list.id}, :method => "post" %>
-			</span>
+			<div class="total" >Total: $<%= @items.sum(:price).round(2) %></div>
+			<br>
+			<div class="bottom-nav">
+				<% unless @cur_user.temp %>
+				<span class="edit"><%= link_to 'Edit', edit_shopping_list_path(@shopping_list) %></span>
+				<% end %>
+				<span class="order-this"><%= link_to "Order this list!", {:controller=>"orders", :action=>"create",
+										:list_id => @shopping_list.id}, :method => "post" %>
+				</span>
+			</div>
 
 		<% end %>
 <% else %>

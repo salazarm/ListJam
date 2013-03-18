@@ -4,6 +4,7 @@ class CreateShoppingLists < ActiveRecord::Migration
       t.integer :user_id
       t.string :name
       t.boolean :temp, :default => false
+      t.boolean :public, :default => false
 
       t.timestamps
     end

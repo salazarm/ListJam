@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   # all of a user's shopping_lists to find the one that has "active=true"
 
   VALID_EMAIL_REGEX = /^.+@.+\..+$/i 
-  attr_accessible :active_list_id, :password, :password_confirmation, :email, :temp
+  attr_accessible :active_list_id, :password, :password_confirmation, :email, :temp, :auth_token
   attr_accessor :password, :password_confirmation
 
   before_create { generate_token(:auth_token) }
@@ -13,21 +13,27 @@ class User < ActiveRecord::Base
   before_validation :downcase_email
 
   validates_presence_of :email, :password, :password_confirmation, 
-                          :on => :create, :unless => "temp"
+                          :on => :create, 
+                          :unless => "temp"
    
-  validates :password, :length => (6..32), :confirmation => true, :if => :setting_password?
+  validates :password, :length => (6..32), 
+                       :confirmation => true, 
+                       :if => :setting_password?
 
     #something@something.something
   validates :email, :uniqueness => true, 
               :format => {:with => VALID_EMAIL_REGEX },
               :unless => "temp"
 
-  # Create the user's shopping cart!
-  after_create { make_list(:name => email ? email+"'s shopping list" : "Anonymous' shopping list") }
+  # Create the user's shopping cart
+  after_create { 
+    make_list(:name => email ? email+"'s shopping list" : "Anonymous' shopping list") 
+  }
 
   has_many :shopping_lists
   has_many :shops
   has_many :transactions, :class_name => 'Order'
+  
 
   HUMANIZED_ATTRIBUTES = {
     :password_digest => "Password"
@@ -59,7 +65,8 @@ class User < ActiveRecord::Base
   def make_list(params)
   	active_list = self.shopping_lists.new(params)
     active_list.temp = temp
-    save
+    puts "saving list"
+    puts save
   	return set_active_list(active_list)
   end
 
@@ -95,13 +102,18 @@ class User < ActiveRecord::Base
 
   # Adds an item to the currently active list
   def add_to_list(item)
+    unless ShoppingList.find_by_id(active_list_id)
+      make_list(:name => email+"'s shopping list")
+    end
+    puts active_list_id
     return get_active_list().items << item
   end
 
   # Sets the currently active_list_id
   def set_active_list(list)
     self.active_list_id = list.id
-    return save
+    save
+    return
   end
 
   # Changes the password

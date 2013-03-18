@@ -10,6 +10,10 @@ module ApplicationHelper
 		return user.id == list.user_id
 	end
 
+	def can_modify_shop?(user, shop)
+		return shop.user_id = user.id
+	end
+
 	# Gets the owner of an item.
 	def get_owner_of_item(item)
 		return get_owner_of_shop(Shop.find_by_id(item.shop_id))
@@ -33,5 +37,12 @@ module ApplicationHelper
 	# Checks if a user is a temporary user.
 	def is_temp_user?(user)
 		return user.temp
+	end
+
+	def list_has_item?(list, item)
+		if list.items.find_by_id(item.id)
+			return true
+		end
+		return false
 	end
 end

@@ -46,12 +46,16 @@
         Account
       </div>
       <div class="account-list">
-        <%= link_to "Current List", {:controller=>"shopping_lists",:action=>"show", :id=> active_list(@cur_user)} %>
+        <% if active_list(@cur_user) %>
+          <%= link_to "Current List", {:controller=>"shopping_lists",:action=>"show", :id=> active_list(@cur_user)} %>
+        <% else %>
+          <span style="color: #000">No active list found</span>
+        <% end %>
       </div>
+      <% unless is_temp_user?(@cur_user) %>
       <div class="account-order">
         <%= link_to "Orders", orders_url %>
       </div>
-      <% unless is_temp_user?(@cur_user) %>
         <div class="account-sales">
           <%= link_to "Sales", {:controller=>"orders",:action=>"sales_index"} %>
         </div>

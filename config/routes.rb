@@ -7,6 +7,7 @@ ShoppingCart::Application.routes.draw do
   put 'users/add/:id' => 'users#add_item'
   post 'users/make_list_active' => 'users#make_list_active'
   get 'sales' => 'orders#sales_index'
+  post 'items/remove' => 'shopping_lists#remove_item'
 
   resources :orders
   resources :shops

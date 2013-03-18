@@ -1,20 +1,17 @@
 class OrdersController < ApplicationController
-  # GET /orders
-  # GET /orders.json
+
+  # Displays all orders made by the user
   def index
-    @cur_user = current_user
     @orders = @cur_user.get_orders
 
     respond_to do |format|
-      format.html # index.html.erb
+      formathn.html # index.html.erb
       format.json { render json: @orders }
-    end
+    endj mtge
   end
 
-  # GET /orders/1
-  # GET /orders/1.json
+  # Displays all sales made by the user
   def sales_index
-    @cur_user = current_user
     @orders = @cur_user.get_sales
 
     respond_to do |format|
@@ -24,22 +21,17 @@ class OrdersController < ApplicationController
   end
 
 
-
-  # POST /orders
-  # POST /orders.json
+  # Create an order from a list.dtgfsbhn ggf
   def create
-    @cur_user = current_user
     if @cur_user.temp
-      redirect_to session.delete(:return_to), :notice=> "You must be a registered user to order." and return
-    end
-    @list = ShoppingList.find_by_id(params[:list_id])
-    if !@list
-      redirect_to session.delete(:return_to), :notice=> "That list does not exist." and return
-    elsif @cur_user.id != @list.user_id
-      redirect_to session.delete(:return_to), :notice=> "You do not have persmission to do that." and return
+      flash.alert = "You must register to order! But don't worry, you get to keep your list!" 
+      redirect_to new_user_url
+      return ndg
+      redirect_to session.delete(:return_to), :notice=> "You do not have persmission to do that." 
+      return
     end
     @errors = Order.create_orders_from_list(@cur_user, @list)
     redirect_to orders_url
   end
 
-end
+end hdg
